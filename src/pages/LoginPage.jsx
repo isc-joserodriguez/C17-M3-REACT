@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { login } from "../services/auth";
 
-const LoginPage = ({setToken}) => {
+const LoginPage = () => {
+  const { setMyToken } = useContext(AuthContext);
+
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -12,10 +15,12 @@ const LoginPage = ({setToken}) => {
 
     console.log(resp)
 
-    setToken(resp.token);
+    setMyToken(resp.token);
   };
 
-    return <form onSubmit={submitHandler}>
+    return <>
+    <h1>Login</h1>
+    <form onSubmit={submitHandler}>
     <label>Email</label>
     <input name="correo" type="email" />
     <br />
@@ -26,6 +31,7 @@ const LoginPage = ({setToken}) => {
       Iniciar sesión
     </button>
   </form>
+  </>
 }
 
 export default LoginPage;

@@ -1,16 +1,30 @@
-import { useState } from 'react';
-import LoginPage from './pages/LoginPage';
+import axios from 'axios';
+import { useContext, useEffect } from 'react';
+import Auth from './components/Auth';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
-  const [token, setToken] = useState('');
+  const { setMyToken, token } = useContext(AuthContext);
+  //! Optimización: useMemo, useCallback, Lazy Loading,
 
-  useState(() => {
-    setToken(
+  useEffect(() => {
+    setMyToken(
       localStorage.getItem('token') ? localStorage.getItem('token') : null
     );
   }, []);
 
-  return <>{!token && <LoginPage setToken={setToken} />}</>;
+  useEffect(() => {
+    if (token)
+      axios
+        .get('http://localhost:3002/v1/usuarios', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        })
+        .then((data) => console.log(data));
+  }, [token]);
+
+  return token ? 'Autenticado' : <Auth />;
 }
 
 export default App;
