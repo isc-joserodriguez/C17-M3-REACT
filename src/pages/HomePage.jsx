@@ -9,6 +9,7 @@ const HomePage = () => {
   useEffect(()=>{
     const getHelados = async () => {
       const resp = await obtenerTodosHelados()
+      console.log(resp)
       setMyHelados(resp);
     }
     getHelados();

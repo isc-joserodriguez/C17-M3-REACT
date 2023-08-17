@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { HeladoProvider } from './context/HeladoContext';
+import { VentaProvider } from './context/VentaContext';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,11 +12,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <HeladoProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </HeladoProvider>
+      <VentaProvider>
+        <HeladoProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </HeladoProvider>
+      </VentaProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
