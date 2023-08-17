@@ -5,12 +5,12 @@ import { AuthContext } from './context/AuthContext';
 
 function App() {
   const { setMyToken, token } = useContext(AuthContext);
-  //! Optimización: useMemo, useCallback, Lazy Loading,
 
   useEffect(() => {
     setMyToken(
       localStorage.getItem('token') ? localStorage.getItem('token') : null
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
