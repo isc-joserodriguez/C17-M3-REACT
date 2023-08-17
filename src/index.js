@@ -1,16 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
+import { HeladoProvider } from './context/HeladoContext';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <BrowserRouter>
+      <HeladoProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </HeladoProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

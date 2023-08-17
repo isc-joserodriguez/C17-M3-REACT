@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { login } from "../services/auth";
 
 const LoginPage = () => {
   const { setMyToken } = useContext(AuthContext);
+  const navigate = useNavigate();
 
 
   const submitHandler = async (event) => {
@@ -12,10 +14,8 @@ const LoginPage = () => {
     const data = Object.fromEntries(formData);
     console.log(data);
     const resp = await login(data)
-
-    console.log(resp)
-
     setMyToken(resp.token);
+    navigate('/');
   };
 
     return <>

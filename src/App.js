@@ -1,7 +1,14 @@
 import axios from 'axios';
 import { useContext, useEffect } from 'react';
-import Auth from './components/Auth';
+import { Route, Routes } from 'react-router-dom';
+import Footer from './components/Footer';
+import Header from './components/Header';
 import { AuthContext } from './context/AuthContext';
+import CheckoutPage from './pages/CheckoutPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import ProductPage from './pages/ProductPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   const { setMyToken, token } = useContext(AuthContext);
@@ -12,7 +19,6 @@ function App() {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
     if (token)
       axios
@@ -24,7 +30,19 @@ function App() {
         .then((data) => console.log(data));
   }, [token]);
 
-  return token ? 'Autenticado' : <Auth />;
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route element={<HomePage />} path="/" />
+        <Route element={<ProductPage />} path="/:id" />
+        <Route element={<LoginPage />} path="/login" />
+        <Route element={<RegisterPage />} path="/register" />
+        <Route element={<CheckoutPage />} path="/checkout" />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
