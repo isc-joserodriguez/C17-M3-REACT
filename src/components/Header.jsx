@@ -3,51 +3,41 @@ import { Link } from 'react-router-dom';
 import { VentaContext } from '../context/VentaContext';
 
 const Header = () => {
-  const { carrito, eliminarProductoCarrito } = useContext(VentaContext);
+  const { carrito, eliminarProductoCarrito, agregarProductoCarrito } =
+    useContext(VentaContext);
 
-const obtenerProductoObjeto = () =>{
-  const productoObject = {};
-  carrito.forEach(producto =>{
-    if(productoObject[producto._id]){
-      productoObject[producto._id].push(producto);
-    }else{
-      productoObject[producto._id] = [producto];
-    }
-  })
+  const obtenerProductoObjeto = () => {
+    const productoObject = {};
+    carrito.forEach((producto) => {
+      if (productoObject[producto._id]) {
+        productoObject[producto._id].push(producto);
+      } else {
+        productoObject[producto._id] = [producto];
+      }
+    });
 
-  return productoObject;
-}
+    return productoObject;
+  };
   const mapearCarrito = () => {
+    const productoObjeto = obtenerProductoObjeto();
 
-    {}
-    return carrito.forEach(()=>{});
-    /* 
-    [
-    {
-        "_id": "64d4560f20a967da48a7280a",
-        "nombre": "Helado",
-        "sabor": "Pera",
-        "precio": 20,
-        "proveedor": {
-            "_id": "64d451919ab04eb87b3653df",
-            "nombre": "Mauricio",
-            "telefono": "1223456788",
-            "__v": 0
-        },
-        "__v": 0
-    },
-]
-    */
-  }
+    return Object.entries(productoObjeto).map(([idProducto, productos]) => (
+      <li key={idProducto}>
+        {productos[0].nombre}
+        <button onClick={() => eliminarProductoCarrito(idProducto)}>-</button>
+        {productos.length}
+        <button onClick={() => agregarProductoCarrito(productos[0])}>+</button>
+      </li>
+    ));
+  };
 
   const mostrarCarrito = () => {
-    if(carrito.length){
-      return mapearCarrito()
+    if (carrito.length) {
+      console.log(mapearCarrito());
+      return mapearCarrito();
     }
     return <h5>Carrito vacío</h5>;
-  }
-
-
+  };
 
   return (
     <ul>
@@ -64,12 +54,8 @@ const obtenerProductoObjeto = () =>{
         <Link to="/checkout">CheckoutPage</Link>
       </li>
       <li>productos: {carrito.length}</li>
-      
-      <ul>
-        {
-          mostrarCarrito()
-        }
-      </ul>
+
+      <ul>{mostrarCarrito()}</ul>
     </ul>
   );
 };

@@ -8,7 +8,7 @@ export const VentaProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
 
   const agregarProductoCarrito = (producto) =>
-    setCarrito([...carrito, producto]);
+    setCarrito([...carrito, producto].sort((a, b) => a._id > b._id));
 
   const eliminarProductoCarrito = (idProducto) => {
     /* const oldCarrito = [...carrito];
@@ -25,7 +25,7 @@ export const VentaProvider = ({ children }) => {
       );
       console.log(indexElement);
       oldCarrito.splice(indexElement, 1);
-      return oldCarrito;
+      return oldCarrito.sort((a, b) => a._id > b._id);
     });
   };
 
