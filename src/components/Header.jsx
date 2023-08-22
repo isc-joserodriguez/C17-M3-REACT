@@ -4,7 +4,6 @@ import { VentaContext } from '../context/VentaContext';
 
 const Header = () => {
   const { carrito, eliminarProductoCarrito } = useContext(VentaContext);
-  let produtosAMostrar = [];
   return (
     <ul>
       <li>
