@@ -31,10 +31,21 @@ export const VentaProvider = ({ children }) => {
 
   const eliminarProductoCarrito = (idProducto) => {
     const oldCarrito = [...carrito];
-    const updatedCarrito = oldCarrito.filter(
-      (producto) => producto._id !== idProducto
+    const indexElement = oldCarrito.findIndex(
+      (producto) => producto._id === idProducto
     );
-    setCarrito(updatedCarrito);
+    oldCarrito.splice(indexElement, 1);
+    setCarrito(oldCarrito);
+
+    /* setCarrito((oldState) => {
+      const oldCarrito = [...oldState];
+      const indexElement = oldCarrito.findIndex(
+        (producto) => producto._id === idProducto
+      );
+      console.log(indexElement);
+      oldCarrito.splice(indexElement, 1);
+      return oldCarrito;
+    }); */
   };
 
   return (

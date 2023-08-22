@@ -9,8 +9,9 @@ const HomePage = () => {
   useEffect(()=>{
     const getHelados = async () => {
       const resp = await obtenerTodosHelados()
-      console.log(resp)
-      setMyHelados(resp);
+      if(resp){
+        setMyHelados(resp);
+      }
     }
     getHelados();
   // eslint-disable-next-line react-hooks/exhaustive-deps

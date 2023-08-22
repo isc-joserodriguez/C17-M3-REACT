@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
@@ -11,7 +10,7 @@ import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 
 function App() {
-  const { setMyToken, token } = useContext(AuthContext);
+  const { setMyToken } = useContext(AuthContext);
 
   useEffect(() => {
     setMyToken(
@@ -19,16 +18,6 @@ function App() {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    if (token)
-      axios
-        .get('http://localhost:3002/v1/usuarios', {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
-        })
-        .then((data) => console.log(data));
-  }, [token]);
 
   return (
     <>
