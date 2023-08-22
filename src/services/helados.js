@@ -4,7 +4,7 @@ export const obtenerTodosHelados = async () => {
   try {
     const {
       data: { data },
-    } = await axios.get('http://localhost:3002/v1/helados');
+    } = await axios.get(process.env.REACT_APP_API_URI + '/helados');
     return data;
   } catch (e) {
     console.error(e);

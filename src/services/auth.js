@@ -4,7 +4,7 @@ export const login = async ({ correo, password }) => {
   try {
     const {
       data: { data },
-    } = await axios.post('http://localhost:3002/v1/auth/login', {
+    } = await axios.post(process.env.REACT_APP_API_URI + '/auth/login', {
       correo,
       password,
     });
@@ -22,7 +22,7 @@ export const register = async (registerData) => {
     const {
       data: { data },
     } = await axios.post(
-      'http://localhost:3002/v1/auth/register',
+      process.env.REACT_APP_API_URI + '/auth/register',
       registerData
     );
     localStorage.setItem('token', data.token);

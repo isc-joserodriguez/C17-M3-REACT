@@ -10,17 +10,15 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <VentaProvider>
-        <HeladoProvider>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </HeladoProvider>
-      </VentaProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <VentaProvider>
+      <HeladoProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </HeladoProvider>
+    </VentaProvider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
