@@ -1,3 +1,4 @@
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -15,7 +16,16 @@ root.render(
     <VentaProvider>
       <HeladoProvider>
         <AuthProvider>
-          <App />
+          <PayPalScriptProvider
+            options={{
+              clientId:
+                'AVNgd9dq8IfywtirKrGPBnValzxfH6X2pLkVWfH3ca7CrrIFcah7b_iTbdQ0i96UitpQET1bY2Vkiisi',
+              components: 'buttons',
+              currency: 'MXN',
+            }}
+          >
+            <App />
+          </PayPalScriptProvider>
         </AuthProvider>
       </HeladoProvider>
     </VentaProvider>

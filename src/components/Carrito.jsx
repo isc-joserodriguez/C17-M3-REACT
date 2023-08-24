@@ -4,6 +4,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { VentaContext } from '../context/VentaContext';
+import ButtonWrapper from './ButtonWrapper';
 
 const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
     const navigate = useNavigate()
@@ -24,14 +25,8 @@ const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
   const mapearCarrito = () => {
     const productoObjeto = obtenerProductoObjeto();
 
-    let total = 0;
-    const resumen = Object.entries(productoObjeto).map(
-      ([idProducto, productos]) => {
-        total += productos.reduce(
-          (accProduct, nextProduct) => accProduct + nextProduct.precio,
-          0
-        );
-        return (
+    return Object.entries(productoObjeto).map(
+      ([idProducto, productos]) => (
           <li key={idProducto}>
             {productos[0].nombre} - ${productos[0].precio}
             <Button
@@ -50,20 +45,8 @@ const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
               <AiOutlinePlus />
             </Button>
           </li>
-        );
-      }
+        )
     );
-
-    resumen.push(
-      <li key="cualquiera" onClick={()=>{
-        onHandleCloseCarrito();
-        navigate('/checkout')}
-        }>
-        <Button>Pagar ${total}</Button>{' '}
-      </li>
-    );
-
-    return resumen;
   };
 
   const mostrarCarrito = () => {
@@ -80,6 +63,7 @@ const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <ul>{mostrarCarrito()}</ul>
+        <ButtonWrapper amount={carrito.reduce((acc, next)=>acc+next.precio, 0)}/>
       </Offcanvas.Body>
     </Offcanvas>
   );
