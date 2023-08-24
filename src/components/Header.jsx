@@ -53,6 +53,9 @@ const Header = () => {
       <li>
         <Link to="/checkout">CheckoutPage</Link>
       </li>
+      <li>
+        <Link to="/nuevo-helado">Agregar Helados</Link>
+      </li>
       <li>productos: {carrito.length}</li>
 
       <ul>{mostrarCarrito()}</ul>

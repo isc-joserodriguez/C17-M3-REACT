@@ -6,6 +6,7 @@ import { AuthContext } from './context/AuthContext';
 import CheckoutPage from './pages/CheckoutPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import NewHeladoPage from './pages/NewHeladoPage';
 import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 
@@ -28,6 +29,7 @@ function App() {
         <Route element={<LoginPage />} path="/login" />
         <Route element={<RegisterPage />} path="/register" />
         <Route element={<CheckoutPage />} path="/checkout" />
+        <Route element={<NewHeladoPage />} path="/nuevo-helado" />
       </Routes>
       <Footer />
     </>

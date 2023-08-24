@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { crearHelado } from "../services/helados";
 
-const NewHeladoPage = () => {
+const EditHeladoPage = () => {
     const navigate = useNavigate();
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -34,4 +34,4 @@ const NewHeladoPage = () => {
   </>
 }
 
-export default NewHeladoPage;
+export default EditHeladoPage;
