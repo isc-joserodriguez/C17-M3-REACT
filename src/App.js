@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { AuthContext } from './context/AuthContext';
-import CheckoutPage from './pages/CheckoutPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NewHeladoPage from './pages/NewHeladoPage';
@@ -28,7 +27,6 @@ function App() {
         <Route element={<ProductPage />} path="/:id" />
         <Route element={<LoginPage />} path="/login" />
         <Route element={<RegisterPage />} path="/register" />
-        <Route element={<CheckoutPage />} path="/checkout" />
         <Route element={<NewHeladoPage />} path="/nuevo-helado" />
       </Routes>
       <Footer />
