@@ -1,65 +1,56 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { MdShoppingCart } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { VentaContext } from '../context/VentaContext';
+import Carrito from './Carrito';
 
 const Header = () => {
-  const { carrito, eliminarProductoCarrito, agregarProductoCarrito } =
-    useContext(VentaContext);
+  const { carrito } = useContext(VentaContext);
+  const [openCarrito, setOpenCarrito] = useState(false);
 
-  const obtenerProductoObjeto = () => {
-    const productoObject = {};
-    carrito.forEach((producto) => {
-      if (productoObject[producto._id]) {
-        productoObject[producto._id].push(producto);
-      } else {
-        productoObject[producto._id] = [producto];
-      }
-    });
-
-    return productoObject;
-  };
-  const mapearCarrito = () => {
-    const productoObjeto = obtenerProductoObjeto();
-
-    return Object.entries(productoObjeto).map(([idProducto, productos]) => (
-      <li key={idProducto}>
-        {productos[0].nombre}
-        <button onClick={() => eliminarProductoCarrito(idProducto)}>-</button>
-        {productos.length}
-        <button onClick={() => agregarProductoCarrito(productos[0])}>+</button>
-      </li>
-    ));
-  };
-
-  const mostrarCarrito = () => {
-    if (carrito.length) {
-      console.log(mapearCarrito());
-      return mapearCarrito();
-    }
-    return <h5>Carrito vacío</h5>;
-  };
+  const onHandleOpenCarrito = () => setOpenCarrito(true);
+  const onHandleCloseCarrito = () => setOpenCarrito(false);
 
   return (
-    <ul>
-      <li>
-        <Link to="/">HomePage</Link>
-      </li>
-      <li>
-        <Link to="/login">LoginPage</Link>
-      </li>
-      <li>
-        <Link to="/register">RegisterPage</Link>
-      </li>
-      <li>
-        <Link to="/checkout">CheckoutPage</Link>
-      </li>
-      <li>
-        <Link to="/nuevo-helado">Agregar Helados</Link>
-      </li>
-      <li>productos: {carrito.length}</li>
+    <>
+      <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="#home">Home</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/">
+                Home
+              </Nav.Link>
+              <Nav.Link as={Link} to="/login">
+                LoginPage
+              </Nav.Link>
+              <Nav.Link as={Link} to="/register">
+                RegisterPage
+              </Nav.Link>
+              <Nav.Link as={Link} to="/checkout">
+                CheckoutPage
+              </Nav.Link>
+              <Nav.Link as={Link} to="/nuevo-helado">
+                Agregar Helados
+              </Nav.Link>
+              <Nav.Item as={Button} onClick={onHandleOpenCarrito}>
+                <MdShoppingCart /> {carrito.length}
+              </Nav.Item>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      <ul>{mostrarCarrito()}</ul>
-    </ul>
+      <Carrito
+        openCarrito={openCarrito}
+        onHandleCloseCarrito={onHandleCloseCarrito}
+      />
+    </>
   );
 };
 
