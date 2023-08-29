@@ -2,12 +2,10 @@ import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
 import { VentaContext } from '../context/VentaContext';
 import ButtonWrapper from './ButtonWrapper';
 
 const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
-    const navigate = useNavigate()
   const { carrito, eliminarProductoCarrito, agregarProductoCarrito } =
     useContext(VentaContext);
   const obtenerProductoObjeto = () => {
