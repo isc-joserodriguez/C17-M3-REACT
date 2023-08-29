@@ -13,9 +13,9 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <VentaProvider>
-      <HeladoProvider>
-        <AuthProvider>
+    <AuthProvider>
+      <VentaProvider>
+        <HeladoProvider>
           <PayPalScriptProvider
             options={{
               clientId:
@@ -26,9 +26,9 @@ root.render(
           >
             <App />
           </PayPalScriptProvider>
-        </AuthProvider>
-      </HeladoProvider>
-    </VentaProvider>
+        </HeladoProvider>
+      </VentaProvider>
+    </AuthProvider>
   </BrowserRouter>
 );
 

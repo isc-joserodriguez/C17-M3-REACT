@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -22,13 +23,15 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route element={<HomePage />} path="/" />
-        <Route element={<ProductPage />} path="/:id" />
-        <Route element={<LoginPage />} path="/login" />
-        <Route element={<RegisterPage />} path="/register" />
-        <Route element={<NewHeladoPage />} path="/nuevo-helado" />
-      </Routes>
+      <Container>
+        <Routes>
+          <Route element={<HomePage />} path="/" />
+          <Route element={<ProductPage />} path="/:id" />
+          <Route element={<LoginPage />} path="/login" />
+          <Route element={<RegisterPage />} path="/register" />
+          <Route element={<NewHeladoPage />} path="/nuevo-helado" />
+        </Routes>
+      </Container>
       <Footer />
     </>
   );
