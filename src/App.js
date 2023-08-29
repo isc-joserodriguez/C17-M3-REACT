@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { AuthContext } from './context/AuthContext';
@@ -12,7 +12,7 @@ import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 
 function App() {
-  const { setMyToken } = useContext(AuthContext);
+  const { token, setMyToken } = useContext(AuthContext);
 
   useEffect(() => {
     setMyToken(
@@ -27,11 +27,12 @@ function App() {
       <Container>
         <Routes>
           <Route element={<HomePage />} path="/" />
-          <Route element={<ProductPage />} path="/:id" />
-          <Route element={<LoginPage />} path="/login" />
-          <Route element={<RegisterPage />} path="/register" />
-          <Route element={<NewHeladoPage />} path="/nuevo-helado" />
-          <Route element={<LogoutPage />} path="/logout" />
+          {token && <Route element={<ProductPage />} path="/:id" />}
+          {!token && <Route element={<LoginPage />} path="/login" />}
+          {!token && <Route element={<RegisterPage />} path="/register" />}
+          {token && <Route element={<NewHeladoPage />} path="/nuevo-helado" />}
+          {token && <Route element={<LogoutPage />} path="/logout" />}
+          <Route element={<Navigate to="/" />} path="*" />
         </Routes>
       </Container>
       <Footer />
