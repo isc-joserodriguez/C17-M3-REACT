@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
 import NewHeladoPage from './pages/NewHeladoPage';
+import ProductListPage from './pages/ProductList';
 import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 
@@ -26,7 +27,10 @@ function App() {
       <Header />
       <Container>
         <Routes>
-          <Route element={<HomePage />} path="/" />
+          <Route
+            element={!token ? <HomePage /> : <ProductListPage />}
+            path="/"
+          />
           {token && <Route element={<ProductPage />} path="/:id" />}
           {!token && <Route element={<LoginPage />} path="/login" />}
           {!token && <Route element={<RegisterPage />} path="/register" />}

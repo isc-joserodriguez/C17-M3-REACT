@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { VentaContext } from '../context/VentaContext';
-import ButtonWrapper from './ButtonWrapper';
+import ButtonsPayPal from './ButtonsPayPal';
 
 const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
   const { carrito, eliminarProductoCarrito, agregarProductoCarrito } =
@@ -61,7 +61,7 @@ const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <ul>{mostrarCarrito()}</ul>
-        <ButtonWrapper amount={carrito.reduce((acc, next)=>acc+next.precio, 0)}/>
+        <ButtonsPayPal amount={carrito.reduce((acc, next)=>acc+next.precio, 0)}/>
       </Offcanvas.Body>
     </Offcanvas>
   );

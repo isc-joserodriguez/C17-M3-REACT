@@ -1,6 +1,9 @@
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { useState } from "react";
+import { crearVenta } from "../services/ventas";
 
-const ButtonWrapper = ({ showSpinner, amount }) => {
+const ButtonsPayPal = ({ showSpinner, amount }) => {
+  const [orderId, setOrderId]  = useState(null);
     const style = {"layout":"vertical"};
     const [{ isPending }] = usePayPalScriptReducer();
 
@@ -24,7 +27,7 @@ const ButtonWrapper = ({ showSpinner, amount }) => {
                         ],
                       })
                       .then((orderId) => {
-                        console.log("orderId:", orderId);
+                        setOrderId(orderId);
                         return orderId;
                       });
                   }}
@@ -32,7 +35,16 @@ const ButtonWrapper = ({ showSpinner, amount }) => {
                   onApprove={function (data, actions) {
                     // Petición para guardar los datos de la compra y limpiar el carrito
                     return actions.order.capture().then(function () {
-                      alert('Cobrado')
+                      crearVenta({
+                        productos: [
+                          {
+                            producto: 'idProducto',
+                            cantidad: 3,
+                            precioUnitario: 20,
+                          },
+                        ],
+                        total: 60,
+                      })
                     });
                   }}
             />
@@ -40,4 +52,4 @@ const ButtonWrapper = ({ showSpinner, amount }) => {
     );
 }
 
-export default ButtonWrapper;
+export default ButtonsPayPal;
