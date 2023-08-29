@@ -6,6 +6,7 @@ import Header from './components/Header';
 import { AuthContext } from './context/AuthContext';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import LogoutPage from './pages/LogoutPage';
 import NewHeladoPage from './pages/NewHeladoPage';
 import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
@@ -30,6 +31,7 @@ function App() {
           <Route element={<LoginPage />} path="/login" />
           <Route element={<RegisterPage />} path="/register" />
           <Route element={<NewHeladoPage />} path="/nuevo-helado" />
+          <Route element={<LogoutPage />} path="/logout" />
         </Routes>
       </Container>
       <Footer />

@@ -11,7 +11,10 @@ export const AuthProvider = ({ children }) => {
   const setMyToken = (token) => setToken(token);
   const setMyUser = (user) => setUser(user);
 
-  const clearToken = () => setToken('');
+  const clearToken = () => {
+    setToken('');
+    localStorage.removeItem('token');
+  };
 
   return (
     <Provider value={{ token, setMyToken, clearToken, user, setMyUser }}>

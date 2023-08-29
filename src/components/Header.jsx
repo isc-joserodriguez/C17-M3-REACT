@@ -3,12 +3,13 @@ import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { MdShoppingCart } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { MdLogout, MdShoppingCart } from 'react-icons/md';
+import { Link, useNavigate } from 'react-router-dom';
 import { VentaContext } from '../context/VentaContext';
 import Carrito from './Carrito';
 
 const Header = () => {
+  const navigate = useNavigate();
   const { carrito } = useContext(VentaContext);
   const [openCarrito, setOpenCarrito] = useState(false);
 
@@ -37,6 +38,9 @@ const Header = () => {
               </Nav.Link>
               <Nav.Item as={Button} onClick={onHandleOpenCarrito}>
                 <MdShoppingCart /> {carrito.length}
+              </Nav.Item>
+              <Nav.Item as={Button} variant='danger' onClick={()=>navigate('/logout')}>
+                <MdLogout /> 
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
