@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import DetalleProducto from '../components/DetalleProducto';
+import Loader from '../components/Loader/Loader';
 import { HeladoContext } from '../context/HeladoContext';
 
 const ProductPage = () => {
@@ -9,9 +10,7 @@ const ProductPage = () => {
   const helado = helados.find((helado) => helado._id === id);
   // TODO: resolver bug
   return (
-    <ul>
-      {!isLoading && <DetalleProducto helado={helado} detalle/>}
-    </ul>
+      isLoading ? <Loader /> : <DetalleProducto helado={helado} detalle/>
   );
 };
 
