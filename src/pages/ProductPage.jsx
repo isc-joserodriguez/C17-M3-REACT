@@ -4,13 +4,13 @@ import DetalleProducto from '../components/DetalleProducto';
 import { HeladoContext } from '../context/HeladoContext';
 
 const ProductPage = () => {
-  const { helados } = useContext(HeladoContext);
+  const { helados, isLoading } = useContext(HeladoContext);
   const { id } = useParams();
   const helado = helados.find((helado) => helado._id === id);
   // TODO: resolver bug
   return (
     <ul>
-      <DetalleProducto helado={helado} detalle/>
+      {!isLoading && <DetalleProducto helado={helado} detalle/>}
     </ul>
   );
 };
