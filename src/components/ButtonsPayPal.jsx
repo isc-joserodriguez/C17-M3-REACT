@@ -38,9 +38,10 @@ const ButtonsPayPal = ({ showSpinner, amount }) => {
                 },
               ],
             })
-            .then((orderId) => {
-              setOrderId(orderId);
-              return orderId;
+            .then((idOrder) => {
+              setOrderId(idOrder);
+              console.log(orderId)
+              return idOrder;
             });
         }}
         onApprove={function (data, actions) {
