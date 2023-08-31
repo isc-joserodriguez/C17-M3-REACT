@@ -45,7 +45,7 @@ export const VentaProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setCarrito(JSON.parse(localStorage.getItem('carrito')));
+    setCarrito(JSON.parse(localStorage.getItem('carrito')) || []);
   }, []);
 
   useEffect(() => {
