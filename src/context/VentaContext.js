@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const VentaContext = createContext();
 
@@ -25,13 +25,43 @@ export const VentaProvider = ({ children }) => {
       );
       console.log(indexElement);
       oldCarrito.splice(indexElement, 1);
+      if (!oldCarrito.length) {
+        localStorage.setItem('[]');
+      }
       return oldCarrito.sort((a, b) => a._id > b._id);
     });
   };
 
+  const obtenerProductoObjeto = () => {
+    const productoObject = {};
+    carrito.forEach((producto) => {
+      if (productoObject[producto._id]) {
+        productoObject[producto._id].push(producto);
+      } else {
+        productoObject[producto._id] = [producto];
+      }
+    });
+    return productoObject;
+  };
+
+  useEffect(() => {
+    setCarrito(JSON.parse(localStorage.getItem('carrito')));
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('carrito')) {
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+  }, [carrito]);
+
   return (
     <Provider
-      value={{ carrito, agregarProductoCarrito, eliminarProductoCarrito }}
+      value={{
+        carrito,
+        agregarProductoCarrito,
+        eliminarProductoCarrito,
+        obtenerProductoObjeto,
+      }}
     >
       {children}
     </Provider>

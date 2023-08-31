@@ -6,45 +6,35 @@ import { VentaContext } from '../context/VentaContext';
 import ButtonsPayPal from './ButtonsPayPal';
 
 const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
-  const { carrito, eliminarProductoCarrito, agregarProductoCarrito } =
-    useContext(VentaContext);
-  const obtenerProductoObjeto = () => {
-    const productoObject = {};
-    carrito.forEach((producto) => {
-      if (productoObject[producto._id]) {
-        productoObject[producto._id].push(producto);
-      } else {
-        productoObject[producto._id] = [producto];
-      }
-    });
+  const {
+    carrito,
+    eliminarProductoCarrito,
+    agregarProductoCarrito,
+    obtenerProductoObjeto,
+  } = useContext(VentaContext);
 
-    return productoObject;
-  };
   const mapearCarrito = () => {
     const productoObjeto = obtenerProductoObjeto();
-
-    return Object.entries(productoObjeto).map(
-      ([idProducto, productos]) => (
-          <li key={idProducto}>
-            {productos[0].nombre} - ${productos[0].precio}
-            <Button
-              size="sm"
-              variant="danger"
-              onClick={() => eliminarProductoCarrito(idProducto)}
-            >
-              <AiOutlineMinus />
-            </Button>
-            {productos.length}
-            <Button
-              size="sm"
-              variant="success"
-              onClick={() => agregarProductoCarrito(productos[0])}
-            >
-              <AiOutlinePlus />
-            </Button>
-          </li>
-        )
-    );
+    return Object.entries(productoObjeto).map(([idProducto, productos]) => (
+      <li key={idProducto}>
+        {productos[0].nombre} - ${productos[0].precio}
+        <Button
+          size="sm"
+          variant="danger"
+          onClick={() => eliminarProductoCarrito(idProducto)}
+        >
+          <AiOutlineMinus />
+        </Button>
+        {productos.length}
+        <Button
+          size="sm"
+          variant="success"
+          onClick={() => agregarProductoCarrito(productos[0])}
+        >
+          <AiOutlinePlus />
+        </Button>
+      </li>
+    ));
   };
 
   const mostrarCarrito = () => {
@@ -61,7 +51,9 @@ const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <ul>{mostrarCarrito()}</ul>
-        <ButtonsPayPal amount={carrito.reduce((acc, next)=>acc+next.precio, 0)}/>
+        <ButtonsPayPal
+          amount={carrito.reduce((acc, next) => acc + next.precio, 0)}
+        />
       </Offcanvas.Body>
     </Offcanvas>
   );
