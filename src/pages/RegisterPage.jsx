@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { register } from '../services/auth';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const { setMyToken } = useContext(AuthContext);
 
   const submitHandler = async (event) => {
@@ -21,6 +23,7 @@ const RegisterPage = () => {
     console.log(resp);
 
     setMyToken(resp.token);
+    navigate('/');
   };
 
   return (

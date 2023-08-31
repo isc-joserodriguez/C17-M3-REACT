@@ -1,11 +1,10 @@
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { VentaContext } from '../context/VentaContext';
 import { crearVenta } from '../services/ventas';
 
 const ButtonsPayPal = ({ showSpinner, amount }) => {
   const { obtenerProductoObjeto } = useContext(VentaContext);
-  const [orderId, setOrderId] = useState(null);
   const style = { layout: 'vertical' };
   const [{ isPending }] = usePayPalScriptReducer();
 
@@ -38,18 +37,18 @@ const ButtonsPayPal = ({ showSpinner, amount }) => {
                 },
               ],
             })
-            .then((idOrder) => {
-              setOrderId(idOrder);
-              console.log(orderId)
-              return idOrder;
+            .then((orderId) => {
+              return orderId;
             });
         }}
         onApprove={function (data, actions) {
           // Petición para guardar los datos de la compra y limpiar el carrito
+          console.log({data})
           return actions.order.capture().then(function () {
             crearVenta({
               productos: mapearProductos(),
               total: amount,
+              orderId: data.orderId,
             });
           });
         }}
