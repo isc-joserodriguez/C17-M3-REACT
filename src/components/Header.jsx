@@ -10,7 +10,7 @@ import { VentaContext } from '../context/VentaContext';
 import Carrito from './Carrito';
 
 const Header = () => {
-  const {token} = useContext(AuthContext);
+  const {token, role} = useContext(AuthContext);
   const navigate = useNavigate();
   const { carrito } = useContext(VentaContext);
   const [openCarrito, setOpenCarrito] = useState(false);
@@ -25,15 +25,24 @@ const Header = () => {
           <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="ms-auto">
               {!token && <Nav.Link as={Link} to="/login">
                 LoginPage
               </Nav.Link>}
               {!token && <Nav.Link as={Link} to="/register">
                 RegisterPage
               </Nav.Link>}
-              {token && <Nav.Link as={Link} to="/nuevo-helado">
+              {role === 'Administrador' && <Nav.Link as={Link} to="/nuevo-helado">
                 Agregar Helados
+              </Nav.Link>}
+              {role === 'Vendedor' && <Nav.Link as={Link} to="/gestion-helados">
+                Gestion de Helados
+              </Nav.Link>}
+              {role === 'Administrador' && <Nav.Link as={Link} to="/ventas">
+                Ventas
+              </Nav.Link>}
+              {role !== 'cliente' && <Nav.Link as={Link} to="/usuarios">
+                Usuarios
               </Nav.Link>}
               {token && <Nav.Item as={Button} onClick={onHandleOpenCarrito}>
                 <MdShoppingCart /> {carrito.length}

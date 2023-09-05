@@ -13,7 +13,7 @@ import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 
 function App() {
-  const { token, setMyToken } = useContext(AuthContext);
+  const { token, setMyToken, role } = useContext(AuthContext);
 
   useEffect(() => {
     setMyToken(
@@ -34,7 +34,9 @@ function App() {
           {token && <Route element={<ProductPage />} path="/:id" />}
           {!token && <Route element={<LoginPage />} path="/login" />}
           {!token && <Route element={<RegisterPage />} path="/register" />}
-          {token && <Route element={<NewHeladoPage />} path="/nuevo-helado" />}
+          {role === 'Administrador' && (
+            <Route element={<NewHeladoPage />} path="/nuevo-helado" />
+          )}
           {token && <Route element={<LogoutPage />} path="/logout" />}
           <Route element={<Navigate to="/" />} path="*" />
         </Routes>

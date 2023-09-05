@@ -5,7 +5,7 @@ import { register } from '../services/auth';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { setMyToken } = useContext(AuthContext);
+  const { setMyToken, setMyRole } = useContext(AuthContext);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -23,6 +23,7 @@ const RegisterPage = () => {
     console.log(resp);
 
     setMyToken(resp.token);
+    setMyRole(resp.info.rol);
     navigate('/');
   };
 
