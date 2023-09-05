@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const getProveedores = async () => {
+export const obtenerProveedores = async () => {
   try {
     const {
       data: { data },

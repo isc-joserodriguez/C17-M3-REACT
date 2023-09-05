@@ -1,21 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { login } from "../services/auth";
 
 const LoginPage = () => {
-  const { setMyToken } = useContext(AuthContext);
+  const { setMyToken, setMyRole } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate();
 
 
   const submitHandler = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
-    const resp = await login(data)
-    setMyToken(resp.token);
-    navigate('/');
+    try{
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+      console.log(data);
+      const resp = await login(data)
+      setMyToken(resp.token);
+      setMyRole(resp.info.rol);
+      navigate('/');
+    } catch(err){
+      setErrorMessage('Error, intenta de nuevo')
+    }
   };
 
     return <>
@@ -26,6 +32,8 @@ const LoginPage = () => {
     <br />
     <label>Password</label>
     <input name="password" type="password" />
+    <br />
+    <label style={{color:'red', fontWeight:"bold"}}>{errorMessage}</label>
     <br />
     <button type="submit">
       Iniciar sesión

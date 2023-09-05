@@ -9,6 +9,7 @@ export const login = async ({ correo, password }) => {
       password,
     });
     localStorage.setItem('token', data.token);
+    localStorage.setItem('role', data.info.rol);
 
     return data;
   } catch (e) {
@@ -26,6 +27,7 @@ export const register = async (registerData) => {
       registerData
     );
     localStorage.setItem('token', data.token);
+    localStorage.setItem('role', data.info.rol);
 
     return data;
   } catch (e) {

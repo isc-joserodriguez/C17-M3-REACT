@@ -11,14 +11,13 @@ export const AuthProvider = ({ children }) => {
 
   const setMyToken = (token) => setToken(token);
   const setMyUser = (user) => setUser(user);
-  const setMyRole = (role) => {
-    console.log(role);
-    setRole(role);
-  };
+  const setMyRole = (role) => setRole(role);
 
   const clearToken = () => {
     setToken('');
+    setMyRole(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
   };
 
   return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
 import { crearHelado } from "../services/helados";
-import { getProveedores } from "../services/proveedores";
+import { obtenerProveedores } from "../services/proveedores";
 
 const NewHeladoPage = () => {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ const NewHeladoPage = () => {
     useEffect(()=>{
       const init = async () => {
         setIsLoading(true);
-        const proovedores = await getProveedores()
+        const proovedores = await obtenerProveedores()
         setProveedores(proovedores)
         setIsLoading(false);
       }
@@ -41,9 +41,8 @@ const NewHeladoPage = () => {
       <br />
       <label>Proveedor</label>
       <select name="proveedor" >
-        {proveedores.map((proveedor)=>(
+        {proveedores?.map((proveedor)=>(
           <option key={proveedor._id} value={proveedor._id}>{proveedor.nombre}</option>
-          
         ))}
       </select>
       <br />

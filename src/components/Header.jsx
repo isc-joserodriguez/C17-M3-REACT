@@ -38,10 +38,10 @@ const Header = () => {
               {role === 'Vendedor' && <Nav.Link as={Link} to="/gestion-helados">
                 Gestion de Helados
               </Nav.Link>}
-              {role === 'Administrador' && <Nav.Link as={Link} to="/ventas">
-                Ventas
+              {role === 'Administrador' && <Nav.Link as={Link} to="/estadisticas">
+                Estadísticas
               </Nav.Link>}
-              {role !== 'cliente' && <Nav.Link as={Link} to="/usuarios">
+              {role && role !== 'cliente' && <Nav.Link as={Link} to="/usuarios">
                 Usuarios
               </Nav.Link>}
               {token && <Nav.Item as={Button} onClick={onHandleOpenCarrito}>
