@@ -6,8 +6,9 @@ import { obtenerUsuarios } from '../services/usuarios';
 import { obtenerVentas } from '../services/ventas';
 import { periodos } from '../utils';
 
-const EstadisticasPage = () => {
-  const [periodo, setPeriodo] = useState()
+export const Estadisticas = () => {
+  // const [periodo, setPeriodo] = useState()
+  //TODO: Agregar una gráfica apexcharts
   const [estadisticas, setEstadisticas] = useState({
     ventas: 0,
     usuarios: 0,
@@ -55,5 +56,3 @@ const EstadisticasPage = () => {
     </Row>
   );
 };
-
-export default EstadisticasPage;

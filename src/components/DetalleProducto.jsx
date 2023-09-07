@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import { VentaContext } from '../context/VentaContext';
 
-const DetalleProducto = ({ helado, detalle }) => {
+export const DetalleProducto = ({ helado, detalle }) => {
   const { agregarProductoCarrito } = useContext(VentaContext);
   const navigate = useNavigate();
   return (
@@ -35,5 +35,3 @@ const DetalleProducto = ({ helado, detalle }) => {
     </Card>
   );
 };
-
-export default DetalleProducto;

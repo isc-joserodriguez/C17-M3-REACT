@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import DetalleProducto from '../components/DetalleProducto';
+import { DetalleProducto } from '../components';
 import Loader from '../components/Loader/Loader';
 import { HeladoContext } from '../context/HeladoContext';
 

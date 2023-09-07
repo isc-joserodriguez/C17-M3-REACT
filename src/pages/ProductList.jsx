@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Row } from 'react-bootstrap';
-import DetalleProducto from '../components/DetalleProducto';
+import { DetalleProducto } from '../components';
 import { HeladoContext } from '../context/HeladoContext';
 
 const ProductListPage = () => {

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { VentaContext } from '../context/VentaContext';
 import { crearVenta } from '../services/ventas';
 
-const ButtonsPayPal = ({ showSpinner, amount }) => {
+export const ButtonsPayPal = ({ showSpinner, amount }) => {
   const { obtenerProductoObjeto } = useContext(VentaContext);
   const style = { layout: 'vertical' };
   const [{ isPending }] = usePayPalScriptReducer();
@@ -56,5 +56,3 @@ const ButtonsPayPal = ({ showSpinner, amount }) => {
     </>
   );
 };
-
-export default ButtonsPayPal;

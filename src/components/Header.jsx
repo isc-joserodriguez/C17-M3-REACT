@@ -7,9 +7,9 @@ import { MdLogout, MdShoppingCart } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { VentaContext } from '../context/VentaContext';
-import Carrito from './Carrito';
+import { Carrito } from './Carrito';
 
-const Header = () => {
+export const Header = () => {
   const {token, role} = useContext(AuthContext);
   const navigate = useNavigate();
   const { carrito } = useContext(VentaContext);
@@ -38,13 +38,13 @@ const Header = () => {
               {role === 'Vendedor' && <Nav.Link as={Link} to="/gestion-helados">
                 Gestion de Helados
               </Nav.Link>}
-              {role === 'Administrador' && <Nav.Link as={Link} to="/estadisticas">
-                Estadísticas
+              {role === 'Administrador' && <Nav.Link as={Link} to="/dashboard">
+                Dashboard
               </Nav.Link>}
               {role && role !== 'cliente' && <Nav.Link as={Link} to="/usuarios">
                 Usuarios
               </Nav.Link>}
-              {token && <Nav.Item as={Button} onClick={onHandleOpenCarrito}>
+              {role === 'cliente'  && <Nav.Item as={Button} onClick={onHandleOpenCarrito}>
                 <MdShoppingCart /> {carrito.length}
               </Nav.Item>}
               {token && <Nav.Item as={Button} variant='danger' onClick={()=>navigate('/logout')}>
@@ -62,5 +62,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

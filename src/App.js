@@ -1,10 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import { Footer, Header } from './components';
 import { AuthContext } from './context/AuthContext';
-import EstadisticasPage from './pages/EstadisticasPage';
+import DashboardPage from './pages/DashboardPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
@@ -35,7 +34,7 @@ function App() {
           {!token && <Route element={<LoginPage />} path="/login" />}
           {!token && <Route element={<RegisterPage />} path="/register" />}
           {role === 'Administrador' && (
-            <Route element={<EstadisticasPage />} path="/estadisticas" />
+            <Route element={<DashboardPage />} path="/dashboard" />
           )}
           {role === 'Administrador' && (
             <Route element={<NewHeladoPage />} path="/nuevo-helado" />

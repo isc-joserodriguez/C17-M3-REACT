@@ -3,9 +3,9 @@ import { Button } from 'react-bootstrap';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { VentaContext } from '../context/VentaContext';
-import ButtonsPayPal from './ButtonsPayPal';
+import { ButtonsPayPal } from './ButtonsPayPal';
 
-const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
+export const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
   const {
     carrito,
     eliminarProductoCarrito,
@@ -58,5 +58,3 @@ const Carrito = ({ openCarrito, onHandleCloseCarrito }) => {
     </Offcanvas>
   );
 };
-
-export default Carrito;
