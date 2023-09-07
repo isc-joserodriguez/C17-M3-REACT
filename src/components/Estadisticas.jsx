@@ -16,22 +16,16 @@ export const Estadisticas = () => {
     proveedores: 0,
   });
   const { helados } = useContext(HeladoContext);
+
   useEffect(() => {
     const init = async () => {
       const ventas = await obtenerVentas();
-      console.log({ ventas });
       const montoVentas = ventas.reduce((acc, next) => {
         return acc + next.total;
       }, 0);
-
       const usuarios = await obtenerUsuarios();
-      setEstadisticas({
-        ventas: montoVentas,
-        usuarios: usuarios.length,
-        productos: helados.length,
-        proveedores: 0,
-      });
       const proveedores = await obtenerProveedores();
+
       setEstadisticas({
         ventas: montoVentas,
         usuarios: usuarios.length,

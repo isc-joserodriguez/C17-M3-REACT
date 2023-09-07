@@ -4,10 +4,13 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Footer, Header } from './components';
 import { AuthContext } from './context/AuthContext';
 import DashboardPage from './pages/DashboardPage';
+import EditUserPage from './pages/EditUserPage';
 import HomePage from './pages/HomePage';
+import InfoUserPage from './pages/InfoUserPage';
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
 import NewHeladoPage from './pages/NewHeladoPage';
+import NewUserPage from './pages/NewUserPage';
 import ProductListPage from './pages/ProductList';
 import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
@@ -38,6 +41,15 @@ function App() {
           )}
           {role === 'Administrador' && (
             <Route element={<NewHeladoPage />} path="/nuevo-helado" />
+          )}
+          {role === 'Administrador' && (
+            <Route element={<NewUserPage />} path="/nuevo-usuario" />
+          )}
+          {role === 'Administrador' && (
+            <Route element={<EditUserPage />} path="/editar-usuario/:id" />
+          )}
+          {role === 'Administrador' && (
+            <Route element={<InfoUserPage />} path="/info-usuario/:id" />
           )}
           {token && <Route element={<LogoutPage />} path="/logout" />}
           <Route element={<Navigate to="/" />} path="*" />
