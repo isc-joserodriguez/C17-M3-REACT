@@ -1,9 +1,10 @@
-import axios from 'axios';
+import { axiosInstance } from '../utils';
+
 export const crearVenta = async (ventaInfo) => {
   try {
     const {
       data: { data },
-    } = await axios.post(process.env.REACT_APP_API_URI + '/ventas', ventaInfo, {
+    } = await axiosInstance.post('/ventas', ventaInfo, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
@@ -18,7 +19,7 @@ export const obtenerVentas = async () => {
   try {
     const {
       data: { data },
-    } = await axios.get(process.env.REACT_APP_API_URI + '/ventas', {
+    } = await axiosInstance.get('/ventas', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },

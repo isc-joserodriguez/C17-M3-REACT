@@ -1,9 +1,9 @@
-import axios from 'axios';
+import { axiosInstance } from '../utils';
 export const obtenerProveedores = async () => {
   try {
     const {
       data: { data },
-    } = await axios.get(process.env.REACT_APP_API_URI + '/proveedores', {
+    } = await axiosInstance.get('/proveedores', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },

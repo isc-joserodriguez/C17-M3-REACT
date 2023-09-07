@@ -1,10 +1,10 @@
-import axios from 'axios';
+import { axiosInstance } from '../utils';
 
 export const obtenerUsuarios = async () => {
   try {
     const {
       data: { data },
-    } = await axios.get(process.env.REACT_APP_API_URI + '/usuarios', {
+    } = await axiosInstance.get('/usuarios', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
@@ -19,8 +19,8 @@ export const eliminarUsuario = async (userId, editData) => {
   try {
     const {
       data: { data },
-    } = await axios.put(
-      process.env.REACT_APP_API_URI + '/usuarios/' + userId,
+    } = await axiosInstance.put(
+      '/usuarios/' + userId,
       {
         ...editData,
       },

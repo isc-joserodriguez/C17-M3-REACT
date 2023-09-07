@@ -1,10 +1,10 @@
-import axios from 'axios';
+import { axiosInstance } from '../utils';
 
 export const obtenerTodosHelados = async () => {
   try {
     const {
       data: { data },
-    } = await axios.get(process.env.REACT_APP_API_URI + '/helados', {
+    } = await axiosInstance.get('/helados', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
@@ -19,15 +19,11 @@ export const crearHelado = async (heladoInfo) => {
   try {
     const {
       data: { data },
-    } = await axios.post(
-      process.env.REACT_APP_API_URI + '/helados',
-      heladoInfo,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      }
-    );
+    } = await axiosInstance.post('/helados', heladoInfo, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
     return data;
   } catch (e) {
     console.error(e);

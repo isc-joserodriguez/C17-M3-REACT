@@ -41,7 +41,7 @@ export const UserList = () => {
         </thead>
         <tbody>
           {usuarios.map((usuario, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td style={{ textTransform: 'capitalize' }}>
                 {usuario.nombre} {usuario.apellido}

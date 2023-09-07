@@ -1,10 +1,10 @@
-import axios from 'axios';
+import { axiosInstance } from '../utils';
 
 export const login = async ({ correo, password }) => {
   try {
     const {
       data: { data },
-    } = await axios.post(process.env.REACT_APP_API_URI + '/auth/login', {
+    } = await axiosInstance.post('/auth/login', {
       correo,
       password,
     });
@@ -22,10 +22,7 @@ export const register = async (registerData) => {
     console.log({ registerData });
     const {
       data: { data },
-    } = await axios.post(
-      process.env.REACT_APP_API_URI + '/auth/register',
-      registerData
-    );
+    } = await axiosInstance.post('/auth/register', registerData);
     localStorage.setItem('token', data.token);
     localStorage.setItem('role', data.info.rol);
 
